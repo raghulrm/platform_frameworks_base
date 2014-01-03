@@ -414,16 +414,16 @@ class QuickSettings {
         mModel.addWifiTile(wifiTile, new NetworkActivityCallback() {
             @Override
             public void refreshView(QuickSettingsTileView view, State state) {
-                WifiState wifiState = (WifiState) state;
-                ImageView iv = (ImageView) view.findViewById(R.id.image);
-                iv.setImageResource(wifiState.iconId);
-                setActivity(view, wifiState);
-                TextView tv = (TextView) view.findViewById(R.id.text);
-                tv.setText(wifiState.label);
-                wifiTile.setContentDescription(mContext.getString(
-                        R.string.accessibility_quick_settings_wifi,
-                        wifiState.signalContentDescription,
-                        (wifiState.connected) ? wifiState.label : ""));
+                // WifiState wifiState = (WifiState) state;
+                // ImageView iv = (ImageView) view.findViewById(R.id.image);
+                // iv.setImageResource(wifiState.iconId);
+                // setActivity(view, wifiState);
+                // TextView tv = (TextView) view.findViewById(R.id.text);
+                // tv.setText(wifiState.label);
+                // wifiTile.setContentDescription(mContext.getString(
+                //         R.string.accessibility_quick_settings_wifi,
+                //         wifiState.signalContentDescription,
+                //         (wifiState.connected) ? wifiState.label : ""));
             }
         });
         //parent.addView(wifiTile);
@@ -501,7 +501,7 @@ class QuickSettings {
                             }
                         }
                     });
-            //parent.addView(rotationLockTile);
+            parent.addView(rotationLockTile);
         }
 
         // Battery
@@ -534,7 +534,7 @@ class QuickSettings {
                         mContext.getString(R.string.accessibility_quick_settings_battery, t));
             }
         });
-        //parent.addView(batteryTile);
+        parent.addView(batteryTile);
 
         // Airplane Mode
         final QuickSettingsBasicTile airplaneTile
@@ -542,14 +542,14 @@ class QuickSettings {
         mModel.addAirplaneModeTile(airplaneTile, new QuickSettingsModel.RefreshCallback() {
             @Override
             public void refreshView(QuickSettingsTileView unused, State state) {
-                airplaneTile.setImageResource(state.iconId);
+                // airplaneTile.setImageResource(state.iconId);
 
-                String airplaneState = mContext.getString(
-                        (state.enabled) ? R.string.accessibility_desc_on
-                                : R.string.accessibility_desc_off);
-                airplaneTile.setContentDescription(
-                        mContext.getString(R.string.accessibility_quick_settings_airplane, airplaneState));
-                airplaneTile.setText(state.label);
+                // String airplaneState = mContext.getString(
+                //         (state.enabled) ? R.string.accessibility_desc_on
+                //                 : R.string.accessibility_desc_off);
+                // airplaneTile.setContentDescription(
+                //         mContext.getString(R.string.accessibility_quick_settings_airplane, airplaneState));
+                // airplaneTile.setText(state.label);
             }
         });
         //parent.addView(airplaneTile);
@@ -581,8 +581,8 @@ class QuickSettings {
             mModel.addBluetoothTile(bluetoothTile, new QuickSettingsModel.RefreshCallback() {
                 @Override
                 public void refreshView(QuickSettingsTileView unused, State state) {
-                    BluetoothState bluetoothState = (BluetoothState) state;
-                    bluetoothTile.setImageResource(state.iconId);
+                    // BluetoothState bluetoothState = (BluetoothState) state;
+                    // bluetoothTile.setImageResource(state.iconId);
 
                     /*
                     Resources r = mContext.getResources();
@@ -598,10 +598,10 @@ class QuickSettings {
                                 btDevices.size());
                     }
                     */
-                    bluetoothTile.setContentDescription(mContext.getString(
-                            R.string.accessibility_quick_settings_bluetooth,
-                            bluetoothState.stateContentDescription));
-                    bluetoothTile.setText(state.label);
+                    // bluetoothTile.setContentDescription(mContext.getString(
+                    //         R.string.accessibility_quick_settings_bluetooth,
+                    //         bluetoothState.stateContentDescription));
+                    // bluetoothTile.setText(state.label);
                 }
             });
             //parent.addView(bluetoothTile);
@@ -636,14 +636,14 @@ class QuickSettings {
         mModel.addLocationTile(locationTile, new QuickSettingsModel.RefreshCallback() {
             @Override
             public void refreshView(QuickSettingsTileView unused, State state) {
-                locationTile.setImageResource(state.iconId);
-                String locationState = mContext.getString(
-                        (state.enabled) ? R.string.accessibility_desc_on
-                                : R.string.accessibility_desc_off);
-                locationTile.setContentDescription(mContext.getString(
-                        R.string.accessibility_quick_settings_location,
-                        locationState));
-                locationTile.setText(state.label);
+                // locationTile.setImageResource(state.iconId);
+                // String locationState = mContext.getString(
+                //         (state.enabled) ? R.string.accessibility_desc_on
+                //                 : R.string.accessibility_desc_off);
+                // locationTile.setContentDescription(mContext.getString(
+                //         R.string.accessibility_quick_settings_location,
+                //         locationState));
+                // locationTile.setText(state.label);
             }
         });
         //parent.addView(locationTile);
