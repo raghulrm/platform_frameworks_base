@@ -129,11 +129,11 @@ class QuickSettings {
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(DisplayManager.ACTION_WIFI_DISPLAY_STATUS_CHANGED);
-        // filter.addAction(BluetoothAdapter.ACTION_CONNECTION_STATE_CHANGED);
-        // filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-        // filter.addAction(Intent.ACTION_USER_SWITCHED);
-        // filter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
-        // filter.addAction(KeyChain.ACTION_STORAGE_CHANGED);
+        filter.addAction(BluetoothAdapter.ACTION_CONNECTION_STATE_CHANGED);
+        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+        filter.addAction(Intent.ACTION_USER_SWITCHED);
+        filter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
+        filter.addAction(KeyChain.ACTION_STORAGE_CHANGED);
         mContext.registerReceiver(mReceiver, filter);
 
         IntentFilter profileFilter = new IntentFilter();
@@ -167,14 +167,14 @@ class QuickSettings {
         mLocationController = locationController;
 
         setupQuickSettings();
-        //updateResources();
-        //applyLocationEnabledStatus();
+        updateResources();
+        applyLocationEnabledStatus();
 
-        //networkController.addNetworkSignalChangedCallback(mModel);
-        //bluetoothController.addStateChangedCallback(mModel);
-        //batteryController.addStateChangedCallback(mModel);
-        //locationController.addSettingsChangedCallback(mModel);
-        //rotationLockController.addRotationLockControllerCallback(mModel);
+        networkController.addNetworkSignalChangedCallback(mModel);
+        bluetoothController.addStateChangedCallback(mModel);
+        batteryController.addStateChangedCallback(mModel);
+        locationController.addSettingsChangedCallback(mModel);
+        rotationLockController.addRotationLockControllerCallback(mModel);
     }
 
     private void queryForSslCaCerts() {
@@ -191,7 +191,7 @@ class QuickSettings {
                 super.onPostExecute(result);
                 boolean hasCert = result.first;
                 boolean isManaged = result.second;
-                //mModel.setSslCaCertWarningTileInfo(hasCert, isManaged);
+                mModel.setSslCaCertWarningTileInfo(hasCert, isManaged);
             }
         };
         mQueryCertTask.execute();
@@ -254,7 +254,7 @@ class QuickSettings {
             @Override
             protected void onPostExecute(Pair<String, Drawable> result) {
                 super.onPostExecute(result);
-                //mModel.setUserTileInfo(result.first, result.second);
+                mModel.setUserTileInfo(result.first, result.second);
                 mUserInfoTask = null;
             }
         };
@@ -266,8 +266,8 @@ class QuickSettings {
         LayoutInflater inflater = LayoutInflater.from(mContext);
 
         addUserTiles(mContainerView, inflater);
-        //addSystemTiles(mContainerView, inflater);
-        //addTemporaryTiles(mContainerView, inflater);
+        addSystemTiles(mContainerView, inflater);
+        addTemporaryTiles(mContainerView, inflater);
 
         queryForUserInformation();
         queryForSslCaCerts();
@@ -426,7 +426,7 @@ class QuickSettings {
                         (wifiState.connected) ? wifiState.label : ""));
             }
         });
-        parent.addView(wifiTile);
+        //parent.addView(wifiTile);
 
         if (mModel.deviceHasMobileData()) {
             // RSSI
@@ -501,7 +501,7 @@ class QuickSettings {
                             }
                         }
                     });
-            parent.addView(rotationLockTile);
+            //parent.addView(rotationLockTile);
         }
 
         // Battery
@@ -534,7 +534,7 @@ class QuickSettings {
                         mContext.getString(R.string.accessibility_quick_settings_battery, t));
             }
         });
-        parent.addView(batteryTile);
+        //parent.addView(batteryTile);
 
         // Airplane Mode
         final QuickSettingsBasicTile airplaneTile
@@ -552,7 +552,7 @@ class QuickSettings {
                 airplaneTile.setText(state.label);
             }
         });
-        parent.addView(airplaneTile);
+        //parent.addView(airplaneTile);
 
         // Bluetooth
         if (mModel.deviceSupportsBluetooth()
@@ -604,7 +604,7 @@ class QuickSettings {
                     bluetoothTile.setText(state.label);
                 }
             });
-            parent.addView(bluetoothTile);
+            //parent.addView(bluetoothTile);
         }
 
         // Location
@@ -646,7 +646,7 @@ class QuickSettings {
                 locationTile.setText(state.label);
             }
         });
-        parent.addView(locationTile);
+        //parent.addView(locationTile);
     }
 
     private void addTemporaryTiles(final ViewGroup parent, final LayoutInflater inflater) {
@@ -782,7 +782,7 @@ class QuickSettings {
         Resources r = mContext.getResources();
 
         // Update the model
-        //mModel.updateResources();
+        mModel.updateResources();
 
         // Update the User, Time, and Settings tiles spans, and reset everything else
         int span = r.getInteger(R.integer.quick_settings_user_time_settings_tile_span);
